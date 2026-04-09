@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>115年第1次AI應用規劃師(初級)測驗速成考試準備分享</title>
+  <style>
+    :root {
+      --color-coral:   #FF6B6B;
+      --color-sky:     #4ECDC4;
+      --color-green:   #95E1D3;
+      --color-yellow:  #FFE66D;
+      --color-orange:  #FF8E53;
+      --color-coral-light:  #FFE8E8;
+      --color-sky-light:    #E0F7F5;
+      --color-green-light:  #E8FAF7;
+      --color-yellow-light: #FFFBE0;
+      --color-bg:       #FAFAFA;
+      --color-surface:  #FFFFFF;
+      --color-text:     #2D3436;
+      --color-text-sub: #636E72;
+      --color-border:   #E0E0E0;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --font-xs:  12px; --font-sm: 14px; --font-md: 16px;
+      --font-lg:  20px; --font-xl: 28px; --font-2xl: 40px;
+      --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
+      --space-lg: 24px; --space-xl: 40px;
+      --transition-fast: 150ms; --transition-normal: 300ms;
+      --transition-slide: 350ms; --transition-flip: 500ms;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-size: var(--font-md); color: var(--color-text);
+      background-color: var(--color-bg); line-height: 1.6; overflow: hidden;
+    }
+    #nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--color-surface); border-bottom: 2px solid var(--color-border);
+      box-shadow: var(--shadow-sm); min-height: 52px;
+      /* position:sticky 已提供定位上下文，子元素 absolute 相對於此 */
+    }
+    #nav-section-name {
+      font-size: var(--font-md); font-weight: 700; color: var(--color-coral);
+      position: absolute; left: 50%; transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    #nav-progress {
+      font-size: var(--font-sm); font-weight: 600; color: var(--color-text-sub);
+      background: var(--color-sky-light); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm);
+    }
+    #slide-container {
+      position: relative; width: 100%;
+      height: calc(100vh - 52px - 80px - 48px); overflow: hidden;
+    }
+    .slide {
+      position: absolute; inset: 0; display: none;
+      flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: var(--space-xl) var(--space-lg); overflow-y: auto;
+      background: var(--color-bg);
+      transition: transform var(--transition-slide) ease, opacity var(--transition-slide) ease;
+    }
+    .slide.active { display: flex; }
+    .slide-enter-right { transform: translateX(100%); opacity: 0; }
+    .slide-enter-left  { transform: translateX(-100%); opacity: 0; }
+    .slide-exit-left   { transform: translateX(-100%); opacity: 0; }
+    .slide-exit-right  { transform: translateX(100%); opacity: 0; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .slide.active .slide-content { animation: fadeInUp var(--transition-normal) ease forwards; }
+    #page-controller {
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--space-md); padding: var(--space-md) var(--space-lg);
+      background: var(--color-surface); border-top: 1px solid var(--color-border); min-height: 80px;
+    }
+    #page-controller button {
+      min-width: 120px; min-height: 44px; padding: var(--space-sm) var(--space-lg);
+      border: none; border-radius: var(--radius-md); font-size: var(--font-md);
+      font-weight: 600; cursor: pointer;
+      transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease, background-color var(--transition-fast) ease;
+    }
+    #btn-prev { background: var(--color-surface); color: var(--color-text-sub); border: 2px solid var(--color-border) !important; }
+    #btn-prev:hover { background: var(--color-sky-light); border-color: var(--color-sky) !important; color: var(--color-sky); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    #btn-next { background: var(--color-coral); color: #fff; box-shadow: var(--shadow-sm); }
+    #btn-next:hover { background: #ff5252; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    #btn-restart { background: var(--color-yellow); color: var(--color-text); box-shadow: var(--shadow-sm); }
+    #btn-restart:hover { background: #ffd93d; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    #page-controller button:active { transform: translateY(0); }
+    #progress-dots {
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: var(--space-sm) var(--space-lg);
+      min-height: 48px; background: var(--color-bg);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--color-border);
+      transition: background var(--transition-fast) ease, transform var(--transition-fast) ease;
+    }
+    .dot.active { background: var(--color-coral); transform: scale(1.4); }
+    #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+    .card { background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--space-lg); width: 100%; max-width: 640px; }
+    .step-card {
+      background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--color-coral); overflow: hidden; margin-bottom: var(--space-md);
+      cursor: pointer; transition: box-shadow var(--transition-fast) ease;
+    }
+    .step-card:hover { box-shadow: var(--shadow-md); }
+    .step-header {
+      display: flex; align-items: center; gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg); min-height: 44px; user-select: none;
+    }
+    .step-number { font-size: var(--font-lg); font-weight: 800; color: var(--color-coral); min-width: 32px; }
+    .step-title { flex: 1; font-size: var(--font-md); font-weight: 600; }
+    .step-icon { font-size: var(--font-lg); }
+    .step-body {
+      overflow: hidden; padding: var(--space-sm) var(--space-lg) var(--space-md);
+      font-size: var(--font-sm); color: var(--color-text-sub);
+    }
+    .highlight-card {
+      background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--color-sky); overflow: hidden; margin-bottom: var(--space-md);
+    }
+    .flip-card { width: 160px; height: 100px; perspective: 1000px; cursor: pointer; }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d; transition: transform var(--transition-flip) ease;
+    }
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      border-radius: var(--radius-md); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: var(--space-md); box-shadow: var(--shadow-sm);
+    }
+    .flip-card-front { background: var(--color-coral); color: #fff; }
+    .flip-card-back  { background: var(--color-sky); color: #fff; transform: rotateY(180deg); }
+    .term-en   { font-size: var(--font-lg); font-weight: 800; }
+    .term-zh   { font-size: var(--font-md); font-weight: 700; margin-bottom: var(--space-xs); }
+    .term-hint { font-size: var(--font-sm); opacity: 0.9; text-align: center; }
+    .resource-card {
+      display: flex; align-items: center; gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg); background: var(--color-surface);
+      border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      text-decoration: none; color: var(--color-text); min-height: 44px; margin-bottom: var(--space-sm);
+      transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease;
+    }
+    .resource-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .resource-icon { font-size: var(--font-lg); }
+    .resource-name { flex: 1; font-weight: 600; }
+    .resource-arrow { color: var(--color-sky); font-weight: 700; }
+    .text-center { text-align: center; }
+    .text-coral  { color: var(--color-coral); }
+    .text-sky    { color: var(--color-sky); }
+    .slide-content {
+      width: 100%; max-width: 720px; display: flex;
+      flex-direction: column; align-items: center; gap: var(--space-lg);
+    }
+    /* info-grid for exam info cards */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); width: 100%; max-width: 560px; }
+    .info-card {
+      background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      padding: var(--space-lg); display: flex; flex-direction: column; align-items: center;
+      gap: var(--space-sm); text-align: center;
+    }
+    .info-card .info-icon { font-size: 2rem; }
+    .info-card .info-label { font-size: var(--font-sm); color: var(--color-text-sub); font-weight: 600; }
+    .info-card .info-value { font-size: var(--font-xl); font-weight: 800; color: var(--color-coral); }
+    /* badge for exam scope */
+    .badge-wrap { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; }
+    .badge {
+      background: var(--color-sky-light); color: var(--color-sky);
+      border: 1.5px solid var(--color-sky); border-radius: 999px;
+      padding: var(--space-xs) var(--space-md); font-size: var(--font-sm); font-weight: 600;
+    }
+    /* quiz buttons */
+    .quiz-btn {
+      width: 100%; min-height: 44px; padding: var(--space-sm) var(--space-md);
+      background: var(--color-surface); border: 2px solid var(--color-border);
+      border-radius: var(--radius-md); font-size: var(--font-md); font-weight: 600;
+      text-align: left; cursor: pointer;
+      transition: background var(--transition-fast) ease, border-color var(--transition-fast) ease;
+    }
+    .quiz-btn:hover:not(:disabled) { background: var(--color-sky-light); border-color: var(--color-sky); }
+    .quiz-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+    .quiz-btn.wrong   { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+    .quiz-btn:disabled { cursor: default; }
+    .flip-cards-wrap { display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center; }
+    /* hierarchy chain */
+    .chain { display: flex; align-items: center; gap: var(--space-sm); flex-wrap: wrap; justify-content: center; }
+    .chain-item {
+      background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      padding: var(--space-sm) var(--space-md); font-weight: 700; font-size: var(--font-md);
+    }
+    .chain-arrow { font-size: var(--font-xl); color: var(--color-coral); font-weight: 800; }
+    /* cover slide */
+    .cover-emoji { font-size: 5rem; line-height: 1; }
+    .cover-title { font-size: var(--font-xl); font-weight: 800; color: var(--color-coral); text-align: center; }
+    .cover-subtitle { font-size: var(--font-lg); color: var(--color-text-sub); text-align: center; }
+    .cover-tagline {
+      font-size: var(--font-lg); font-weight: 700; color: var(--color-sky);
+      background: var(--color-sky-light); padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-md); text-align: center;
+    }
+    .cover-date { font-size: var(--font-md); color: var(--color-text-sub); }
+    /* ending slide */
+    .ending-title { font-size: var(--font-2xl); font-weight: 800; color: var(--color-coral); text-align: center; }
+    .ending-sub   { font-size: var(--font-lg); color: var(--color-text-sub); text-align: center; }
+    .ending-small { font-size: var(--font-sm); color: var(--color-text-sub); text-align: center; }
+    /* section intro */
+    .section-intro {
+      background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+      padding: var(--space-xl); text-align: center; width: 100%; max-width: 600px;
+    }
+    .section-intro .intro-emoji { font-size: 3rem; }
+    .section-intro h2 { font-size: var(--font-xl); font-weight: 800; color: var(--color-coral); margin: var(--space-sm) 0; }
+    .section-intro p  { font-size: var(--font-md); color: var(--color-text-sub); }
+    /* slide title */
+    .slide-title { font-size: var(--font-xl); font-weight: 800; color: var(--color-text); text-align: center; }
+    .slide-subtitle { font-size: var(--font-md); color: var(--color-text-sub); text-align: center; font-style: italic; }
+    /* iPAS info card */
+    .ipas-card {
+      background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+      padding: var(--space-xl); text-align: center; width: 100%; max-width: 560px;
+    }
+    .ipas-card .ipas-icon { font-size: 3rem; }
+    .ipas-card h3 { font-size: var(--font-lg); font-weight: 800; color: var(--color-coral); margin: var(--space-sm) 0; }
+    .ipas-card p  { font-size: var(--font-md); color: var(--color-text-sub); }
+    @media (min-width: 1024px) {
+      #nav-bar { padding: var(--space-md) var(--space-xl); }
+      #nav-section-name { font-size: var(--font-lg); }
+      .slide { padding: var(--space-xl) var(--space-xl); }
+      .slide-content { max-width: 800px; }
+      .flip-card { width: 180px; height: 110px; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      #nav-bar { padding: var(--space-sm) var(--space-lg); }
+      .slide { padding: var(--space-lg) var(--space-lg); }
+      .slide-content { max-width: 680px; }
+    }
+    @media (max-width: 767px) {
+      :root { --font-xs:12px; --font-sm:14px; --font-md:16px; --font-lg:18px; --font-xl:24px; --font-2xl:32px; }
+      #nav-bar { padding: var(--space-sm) var(--space-md); min-height: 48px; }
+      #nav-section-name { font-size: var(--font-sm); }
+      .slide { padding: var(--space-lg) var(--space-md); }
+      .slide-content { max-width: 100%; gap: var(--space-md); }
+      #page-controller button { min-height: 44px; min-width: 100px; font-size: var(--font-sm); }
+      .step-header { min-height: 44px; }
+      .resource-card { min-height: 44px; }
+      .flip-card { width: 140px; height: 90px; }
+      .dot { width: 10px; height: 10px; }
+      #page-controller { gap: var(--space-sm); padding: var(--space-sm) var(--space-md); }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .cover-title { font-size: var(--font-lg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0ms !important; animation-delay: 0ms !important;
+        transition-duration: 0ms !important; transition-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav-bar" role="navigation" aria-label="章節導覽">
+    <span id="nav-section-name">封面與自我介紹</span>
+    <span id="nav-progress" aria-live="polite">6%</span>
+  </nav>
+
+  <div id="slide-container" role="main" aria-label="簡報內容">
+
+    <!-- ===== 章節一：封面與自我介紹 ===== -->
+
+    <!-- s1-0：封面 -->
+    <section class="slide active" data-section="1" data-section-name="封面與自我介紹" id="s1-0">
+      <div class="slide-content text-center">
+        <div class="cover-emoji">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 對話框 -->
+            <rect x="62" y="8" width="48" height="32" rx="8" fill="#4ECDC4" stroke="#2D3436" stroke-width="2.5"/>
+            <line x1="72" y1="18" x2="100" y2="18" stroke="#2D3436" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="72" y1="25" x2="100" y2="25" stroke="#2D3436" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="72" y1="32" x2="92" y2="32" stroke="#2D3436" stroke-width="2.5" stroke-linecap="round"/>
+            <polygon points="70,40 62,48 78,40" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" stroke-linejoin="round"/>
+            <!-- 天線 -->
+            <line x1="60" y1="20" x2="60" y2="32" stroke="#2D3436" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="60" cy="18" r="4" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+            <!-- 頭部 -->
+            <rect x="28" y="30" width="56" height="44" rx="16" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+            <!-- 臉部面板 -->
+            <rect x="34" y="36" width="44" height="30" rx="8" fill="#2C4A8C" stroke="#2D3436" stroke-width="2"/>
+            <!-- 眼睛 -->
+            <circle cx="48" cy="49" r="5" fill="#00CEC9"/>
+            <circle cx="64" cy="49" r="5" fill="#00CEC9"/>
+            <circle cx="50" cy="49" r="2" fill="white"/>
+            <circle cx="66" cy="49" r="2" fill="white"/>
+            <!-- 嘴巴 -->
+            <path d="M50 60 Q56 65 62 60" stroke="#00CEC9" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- 耳朵 -->
+            <rect x="18" y="42" width="12" height="18" rx="6" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+            <rect x="82" y="42" width="12" height="18" rx="6" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+            <!-- 身體 -->
+            <rect x="34" y="72" width="44" height="32" rx="12" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+            <!-- 胸口圓鈕 -->
+            <circle cx="56" cy="88" r="8" fill="#2C4A8C" stroke="#2D3436" stroke-width="2"/>
+            <!-- 手臂 -->
+            <rect x="16" y="76" width="20" height="12" rx="6" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+            <rect x="76" y="76" width="20" height="12" rx="6" fill="#E8F4FD" stroke="#2D3436" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <h1 class="cover-title">115年第1次AI應用規劃師(初級)測驗</h1>
+        <p class="cover-title">速成考試準備分享</p>
+        <div class="cover-tagline">免責聲明：內容請自行斟酌使用</div>
+        <p style="font-size:var(--font-xs);color:var(--color-text-sub);margin-top:var(--space-xs);">本網頁以 Kiro 製作</p>
+      </div>
+    </section>
+
+    <!-- s1-1：自我介紹 -->
+    <section class="slide" data-section="1" data-section-name="封面與自我介紹" id="s1-1">
+      <div class="slide-content">
+        <h2 class="slide-title">關於我</h2>
+        <div style="width:100%;max-width:560px;">
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🎓</span>
+              <span class="step-title">背景：非資訊本科</span>
+            </div>
+            <div class="step-body">AI業務也只摸到邊緣</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">⏰</span>
+              <span class="step-title">準備時間：2 週</span>
+            </div>
+            <div class="step-body">速成備考，利用零碎及假日時間</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🏆</span>
+              <span class="step-title">成績：72 / 86</span>
+            </div>
+            <div class="step-body">成績不重要，唯一的目標是通過！</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節二：考試基本介紹（已移除，涉及官方資訊） ===== -->
+
+
+    <!-- ===== 章節三：讀書方式 ===== -->
+
+    <!-- s3-0：步驟一 -->
+    <section class="slide" data-section="3" data-section-name="讀書方式" id="s3-0">
+      <div class="slide-content">
+        <h2 class="slide-title">Step 1：先做功課</h2>
+        <div style="width:100%;max-width:560px;">
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">01</span>
+              <span class="step-title">閱讀 2-3 個考前準備分享</span>
+              <span class="step-icon">📖</span>
+            </div>
+            <div class="step-body">youtube任意找尋，先對整個考試有基本概念</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s3-1：步驟二 -->
+    <section class="slide" data-section="3" data-section-name="讀書方式" id="s3-1">
+      <div class="slide-content">
+        <h2 class="slide-title">Step 2：整理資料來源</h2>
+        <div style="width:100%;max-width:560px;">
+          <div class="highlight-card">
+            <div class="step-header">
+              <span class="step-icon">🌐</span>
+              <span class="step-title">iPAS 官方網站</span>
+            </div>
+            <div class="step-body">裡面的所有資源都要下載</div>
+          </div>
+          <div class="highlight-card">
+            <div class="step-header">
+              <span class="step-icon">📚</span>
+              <span class="step-title">講義及補充教材</span>
+            </div>
+            <div class="step-body">建議集中一種來源教材，避免過多雜訊干擾</div>
+          </div>
+          <div class="highlight-card">
+            <div class="step-header">
+              <span class="step-icon">⚖️</span>
+              <span class="step-title">相關法規</span>
+            </div>
+            <div class="step-body">人工智慧基本法、公部門人工智慧應用參考手冊...等</div>
+          </div>
+          <div class="highlight-card">
+            <div class="step-header">
+              <span class="step-icon">📺</span>
+              <span class="step-title">憶筆 YouTube 頻道</span>
+            </div>
+            <div class="step-body">類似youtube頻道有很多，可以自己找尋</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s3-2：步驟三 -->
+    <section class="slide" data-section="3" data-section-name="讀書方式" id="s3-2">
+      <div class="slide-content">
+        <h2 class="slide-title">Step 3：開始念書</h2>
+        <div style="width:100%;max-width:560px;">
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🎬</span>
+              <span class="step-title">看影片：透過簡短影片引導建立概念</span>
+            </div>
+            <div class="step-body">憶筆 YouTube 的單元影片很好懂</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🤖</span>
+              <span class="step-title">用 AI：用AI工具(如copilot)協助理解</span>
+            </div>
+            <div class="step-body">不懂的術語直接問 AI，比查資料快</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">📝</span>
+              <span class="step-title">做筆記：製作屬於自己的筆記</span>
+            </div>
+            <div class="step-body">用 Excel 整理術語對照表，考前複習超方便</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s3-3：步驟四 -->
+    <section class="slide" data-section="3" data-section-name="讀書方式" id="s3-3">
+      <div class="slide-content">
+        <h2 class="slide-title">Step 4：做考古題</h2>
+        <p class="slide-subtitle">做上一次的考古題（50題）</p>
+        <div style="width:100%;max-width:560px;">
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🔍</span>
+              <span class="step-title">補漏：補上被錯過的知識點</span>
+            </div>
+            <div class="step-body">做完後回頭補強答錯的題目，找出知識盲點</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">💪</span>
+              <span class="step-title">練手感：習慣一口氣做完 50 題</span>
+            </div>
+            <div class="step-body">找到久違的測驗感，訓練題型、專注力與時間分配</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s3-4：步驟五 -->
+    <section class="slide" data-section="3" data-section-name="讀書方式" id="s3-4">
+      <div class="slide-content">
+        <h2 class="slide-title">Step 5：考試當天</h2>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:var(--space-md);">🎯</div>
+          <h3 style="font-size:var(--font-lg);font-weight:800;color:var(--color-coral);margin-bottom:var(--space-sm);">重點熟悉專有名詞</h3>
+          <p style="color:var(--color-text-sub);">考前最後複習，把容易混淆的英文術語再看一遍，確保不會在考場上腦袋空白</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== 章節四：讀書順序 ===== -->
+
+    <!-- s4-0：讀書順序概覽 -->
+    <section class="slide" data-section="4" data-section-name="讀書順序" id="s4-0">
+      <div class="slide-content">
+        <p class="slide-subtitle">這只是個人歷程，請找尋自己最看得下去的順序</p>
+        <div style="width:100%;max-width:600px;">
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">01</span>
+              <span class="step-title">📋 定向：先看 iPAS 公告評鑑內容範圍</span>
+            </div>
+            <div class="step-body">瞭解整體方向，確認考試範圍</div>
+          </div>
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">02</span>
+              <span class="step-title">📖 打底：看講義/補充教材對照</span>
+            </div>
+            <div class="step-body">每單元先看官方講義，段落結束後對照補充教材加強理解</div>
+          </div>
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">03</span>
+              <span class="step-title">📗 補漏：看iPas學習教材</span>
+            </div>
+            <div class="step-body">⚠️ 必看！前面的教材不會講到 No code/Low code 以及常見的統計方法</div>
+          </div>
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">04</span>
+              <span class="step-title">⚖️ 穿插：其他法規穿插看</span>
+            </div>
+            <div class="step-body">教材看累了看法規，法規看累了看教材，互相調劑</div>
+          </div>
+          <div class="step-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-number">05</span>
+              <span class="step-title">📝 測驗：最後做測驗</span>
+            </div>
+            <div class="step-body">建議看過 70% 以上的教材再做，比較不會嚇到自己</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s4-1：重點提醒（已移除，與前頁重複） -->
+
+
+    <!-- ===== 章節五：邪門歪道理解法 ===== -->
+
+    <!-- s5-0：章節介紹 -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-0">
+      <div class="slide-content">
+        <div class="section-intro">
+          <div class="intro-emoji">🧙</div>
+          <h2>邪門歪道理解法</h2>
+          <p style="font-size:var(--font-lg);font-weight:700;color:var(--color-sky);margin:var(--space-sm) 0;">記不住？沒關係，用邪門歪道來記！</p>
+          <p>以下是不負責任記憶法，僅供參考，歡迎創造自己的版本</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-1：翻牌互動（大5V） -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-1">
+      <div class="slide-content">
+        <h2 class="slide-title">猜猜看！點擊翻牌</h2>
+        <p class="slide-subtitle">看到英文，猜猜中文是什麼？</p>
+        <div class="flip-cards-wrap">
+          <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：Volume">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span class="term-en">Volume</span></div>
+              <div class="flip-card-back">
+                <span class="term-zh">數據量</span>
+                <span class="term-hint">也是"音量"的英文 → 量 </span>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：Veracity">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span class="term-en">Veracity</span></div>
+              <div class="flip-card-back">
+                <span class="term-zh">數據真實性</span>
+                <span class="term-hint">era變成real → 真實</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-2：小測驗（Volume & Veracity） -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-2q">
+      <div class="slide-content">
+        <h2 class="slide-title">小測驗</h2>
+        <div class="card" style="max-width:600px;width:100%;">
+          <p style="font-weight:700;font-size:var(--font-md);margin-bottom:var(--space-md);">
+            在大數據的 5V 特性中，下列哪一項描述的是「資料的真實性與可信度」？
+          </p>
+          <div id="quiz-5v" style="display:flex;flex-direction:column;gap:var(--space-sm);">
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-5v')">A. Volume</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-5v')">B. Velocity</button>
+            <button class="quiz-btn" data-correct="true"  onclick="answerQuiz(this,'quiz-5v')">C. Veracity</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-5v')">D. Value</button>
+          </div>
+          <div id="quiz-5v-result" style="display:none;margin-top:var(--space-md);padding:var(--space-md);border-radius:var(--radius-md);font-weight:600;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-3：翻牌互動（神經網路） -->
+    <!-- s5-3：翻牌互動（神經網路） -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-3">
+      <div class="slide-content">
+        <h2 class="slide-title">猜猜看！點擊翻牌</h2>
+        <p class="slide-subtitle">神經網路大匯集</p>
+        <div style="display:flex;flex-direction:column;gap:var(--space-md);align-items:center;width:100%;">
+          <!-- 上排：FNN、DNN -->
+          <div style="display:flex;gap:var(--space-md);justify-content:center;">
+            <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：FNN">
+              <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="term-en">FNN</span></div>
+                <div class="flip-card-back">
+                  <span class="term-zh">前饋神經網路</span>
+                  <span class="term-hint">"F" → Front → 前面(線)</span>
+                </div>
+              </div>
+            </div>
+            <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：DNN">
+              <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="term-en">DNN</span></div>
+                <div class="flip-card-back">
+                  <span class="term-zh">深度神經網路</span>
+                  <span class="term-hint">"D" → Deep → 深度</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 下排：CNN、RNN、LSTM -->
+          <div style="display:flex;gap:var(--space-md);justify-content:center;">
+            <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：CNN">
+              <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="term-en">CNN</span></div>
+                <div class="flip-card-back">
+                  <span class="term-zh">卷積神經網路</span>
+                  <span class="term-hint">"C" → Camera → 擅長處理影像</span>
+                </div>
+              </div>
+            </div>
+            <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：RNN">
+              <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="term-en">RNN</span></div>
+                <div class="flip-card-back">
+                  <span class="term-zh">遞迴神經網路</span>
+                  <span class="term-hint">"R" → Remember → 會處理影像還有記憶上下文能力</span>
+                </div>
+              </div>
+            </div>
+            <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：LSTM">
+              <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="term-en">LSTM</span></div>
+                <div class="flip-card-back">
+                  <span class="term-zh">長短期記憶網路</span>
+                  <span class="term-hint">"L" → Long Remember → 上下文記憶更好</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-4：小測驗（神經網路） -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-4q">
+      <div class="slide-content">
+        <h2 class="slide-title">小測驗</h2>
+        <div class="card" style="max-width:600px;width:100%;">
+          <p style="font-weight:700;font-size:var(--font-md);margin-bottom:var(--space-md);">
+            下列哪種神經網路最適合處理影像辨識任務？
+          </p>
+          <div id="quiz-nn" style="display:flex;flex-direction:column;gap:var(--space-sm);">
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-nn')">A. FNN</button>
+            <button class="quiz-btn" data-correct="true"  onclick="answerQuiz(this,'quiz-nn')">B. CNN</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-nn')">C. RNN</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-nn')">D. LSTM</button>
+          </div>
+          <div id="quiz-nn-result" style="display:none;margin-top:var(--space-md);padding:var(--space-md);border-radius:var(--radius-md);font-weight:600;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-2：階層聯想法 -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-2">
+      <div class="slide-content">
+        <h2 class="slide-title">一座森林絕對比一棵樹厲害 🌳🌳🌳</h2>
+        <div class="card" style="max-width:600px;">
+          <h3 style="font-size:var(--font-md);font-weight:700;color:var(--color-coral);margin-bottom:var(--space-md);">機器學習演算法的進化</h3>
+          <div class="chain">
+            <div class="chain-item">🌳 決策樹</div>
+            <div class="chain-arrow">→</div>
+            <div class="chain-item">🌳🌳 隨機森林</div>
+          </div>
+        </div>
+        <div class="card" style="max-width:600px;">
+          <h3 style="font-size:var(--font-md);font-weight:700;color:var(--color-sky);margin-bottom:var(--space-md);">提示工程與思維鏈的進化</h3>
+          <div class="chain">
+            <div class="chain-item">🌳 思維鏈 CoT</div>
+            <div class="chain-arrow">→</div>
+            <div class="chain-item">🌳🌳 樹狀思維鏈 ToT</div>
+            <div class="chain-arrow">→</div>
+            <div class="chain-item">🌳🌳🌳 圖狀思維鏈 GoT</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s5-7：小測驗（階層聯想法） -->
+    <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-7q">
+      <div class="slide-content">
+        <h2 class="slide-title">小測驗</h2>
+        <div class="card" style="max-width:600px;width:100%;">
+          <p style="font-weight:700;font-size:var(--font-md);margin-bottom:var(--space-md);">
+            下列關於隨機森林（Random Forest）的描述，何者正確？
+          </p>
+          <div id="quiz-rf" style="display:flex;flex-direction:column;gap:var(--space-sm);">
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-rf')">A. 隨機森林是一種單一決策樹的改良版本，準確率較低</button>
+            <button class="quiz-btn" data-correct="true"  onclick="answerQuiz(this,'quiz-rf')">B. 隨機森林由多棵決策樹組成，透過集成學習提升預測準確率</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-rf')">C. 隨機森林只能用於分類問題，無法處理迴歸問題</button>
+            <button class="quiz-btn" data-correct="false" onclick="answerQuiz(this,'quiz-rf')">D. 隨機森林與決策樹的運算複雜度相同</button>
+          </div>
+          <div id="quiz-rf-result" style="display:none;margin-top:var(--space-md);padding:var(--space-md);border-radius:var(--radius-md);font-weight:600;"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== 章節六：考試建議與結語 ===== -->
+
+    <!-- s6-0：考試建議 -->
+    <section class="slide" data-section="6" data-section-name="考試建議與結語" id="s6-0">
+      <div class="slide-content">
+        <h2 class="slide-title">考場小技巧 💡</h2>
+        <div style="width:100%;max-width:560px;">
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">📖</span>
+              <span class="step-title">先閱讀電子測驗方法</span>
+            </div>
+            <div class="step-body">進考場前先瞭解電腦測驗方式，不要緊張</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🔍</span>
+              <span class="step-title">善用放大功能</span>
+            </div>
+            <div class="step-body">不要怕別人看，把字放大看清楚再作答</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">🏷️</span>
+              <span class="step-title">善用標記功能</span>
+            </div>
+            <div class="step-body">用標記算可能的錯題數，並輔助檢查</div>
+          </div>
+          <div class="highlight-card" data-expanded="false">
+            <div class="step-header">
+              <span class="step-icon">✏️</span>
+              <span class="step-title">要不要帶筆？</span>
+            </div>
+            <div class="step-body">可，也可不用</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- s6-1：結語 -->
+    <section class="slide" data-section="6" data-section-name="考試建議與結語" id="s6-1">
+      <div class="slide-content text-center">
+        <div style="font-size:4rem;">🎉</div>
+        <h1 class="ending-title">祝各位All PASS!</h1>
+        <p class="ending-sub">記住，唯一目標就是通過！</p>
+        <p class="ending-small">考完就速忘也沒關係</p>
+      </div>
+    </section>
+
+  </div><!-- /#slide-container -->
+
+  <!-- 進度指示器 -->
+  <div id="progress-dots" role="tablist" aria-label="章節內進度"></div>
+
+  <!-- 翻頁控制器 -->
+  <div id="page-controller" role="navigation" aria-label="翻頁控制">
+    <button id="btn-prev" aria-label="上一頁">← 上一頁</button>
+    <button id="btn-next" aria-label="下一頁">下一頁 →</button>
+    <button id="btn-restart" aria-label="重新開始" hidden>🔄 重新開始</button>
+  </div>
+
+  <!-- 彩帶動畫 Canvas -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script>
+    // ===== SECTIONS 常數與 AppState =====
+    const SECTIONS = [
+      { id: 1, name: "封面與自我介紹",   slideCount: 2 },
+      { id: 2, name: "考試基本介紹",     slideCount: 0 },
+      { id: 3, name: "讀書方式",         slideCount: 5 },
+      { id: 4, name: "讀書順序",         slideCount: 1 },
+      { id: 5, name: "邪門歪道理解法",   slideCount: 7 },
+      { id: 6, name: "考試建議與結語",   slideCount: 2 },
+    ];
+
+    const AppState = {
+      currentIndex: 0,
+      totalSlides: 17,
+      slides: [],
+      isAnimating: false,
+    };
+
+    // 取得目前 Slide 對應的章節資訊
+    function getSectionForIndex(index) {
+      let count = 0;
+      for (const section of SECTIONS) {
+        const start = count;
+        const end = count + section.slideCount - 1;
+        if (index >= start && index <= end) {
+          return { section, slideIndexInSection: index - start };
+        }
+        count += section.slideCount;
+      }
+      return { section: SECTIONS[SECTIONS.length - 1], slideIndexInSection: 0 };
+    }
+
+    function updateNavBar() {
+      const { section } = getSectionForIndex(AppState.currentIndex);
+      const pct = Math.round((AppState.currentIndex + 1) / AppState.totalSlides * 100);
+      const nameEl = document.getElementById('nav-section-name');
+      const progEl = document.getElementById('nav-progress');
+      if (nameEl) nameEl.textContent = section.name;
+      if (progEl) progEl.textContent = pct + '%';
+    }
+
+    function updateProgressDots() {
+      const container = document.getElementById('progress-dots');
+      if (!container) return;
+      const { section, slideIndexInSection } = getSectionForIndex(AppState.currentIndex);
+      container.innerHTML = '';
+      for (let i = 0; i < section.slideCount; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === slideIndexInSection ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', i === slideIndexInSection ? 'true' : 'false');
+        container.appendChild(dot);
+      }
+    }
+
+    function updateButtons() {
+      const btnPrev    = document.getElementById('btn-prev');
+      const btnNext    = document.getElementById('btn-next');
+      const btnRestart = document.getElementById('btn-restart');
+      if (!btnPrev || !btnNext || !btnRestart) return;
+      const isFirst = AppState.currentIndex === 0;
+      const isLast  = AppState.currentIndex === AppState.totalSlides - 1;
+      btnPrev.hidden    = isFirst;
+      btnNext.hidden    = isLast;
+      btnRestart.hidden = !isLast;
+    }
+
+    function applyTransition(oldSlide, newSlide, direction) {
+      if (!oldSlide || !newSlide) { AppState.isAnimating = false; return; }
+      const DURATION = 350;
+      const enterClass = direction === 'next' ? 'slide-enter-right' : 'slide-enter-left';
+      const exitClass  = direction === 'next' ? 'slide-exit-left'  : 'slide-exit-right';
+      newSlide.classList.add(enterClass);
+      newSlide.classList.add('active');
+      newSlide.scrollTop = 0;
+      void newSlide.offsetWidth;
+      newSlide.classList.remove(enterClass);
+      oldSlide.classList.add(exitClass);
+      setTimeout(() => {
+        oldSlide.classList.remove('active');
+        oldSlide.classList.remove(exitClass);
+        oldSlide.scrollTop = 0;
+        AppState.isAnimating = false;
+      }, DURATION);
+    }
+
+    function navigate(direction) {
+      if (AppState.isAnimating) return;
+      const oldIndex = AppState.currentIndex;
+      let newIndex;
+      if (direction === 'next') {
+        if (oldIndex >= AppState.totalSlides - 1) return;
+        newIndex = oldIndex + 1;
+      } else {
+        if (oldIndex <= 0) return;
+        newIndex = oldIndex - 1;
+      }
+      AppState.isAnimating = true;
+      AppState.currentIndex = newIndex;
+      applyTransition(AppState.slides[oldIndex] || null, AppState.slides[newIndex] || null, direction);
+      updateNavBar();
+      updateProgressDots();
+      updateButtons();
+      if (newIndex === AppState.totalSlides - 1) triggerConfetti();
+    }
+
+    // ===== 任務 6：可展開卡片互動邏輯 =====
+    function initExpandableCards() {
+      const cards = document.querySelectorAll('.step-card, .highlight-card');
+      cards.forEach(function(card) {
+        const header = card.querySelector('.step-header');
+        if (!header) return;
+        header.addEventListener('click', function() {
+          const expanded = card.getAttribute('data-expanded') === 'true';
+          card.setAttribute('data-expanded', expanded ? 'false' : 'true');
+        });
+      });
+    }
+
+    // ===== 任務 11：翻牌元件互動邏輯 =====
+    function initFlipCards() {
+      const flipCards = document.querySelectorAll('.flip-card');
+      flipCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          card.classList.toggle('flipped');
+        });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.classList.toggle('flipped');
+          }
+        });
+      });
+    }
+
+    // ===== 測驗互動 =====
+    function answerQuiz(btn, quizId) {
+      const container = btn.parentElement;
+      const allBtns = container.querySelectorAll('.quiz-btn');
+      allBtns.forEach(function(b) {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') b.classList.add('correct');
+      });
+      const resultEl = document.getElementById(quizId + '-result');
+      if (resultEl) {
+        resultEl.style.display = 'block';
+        if (btn.dataset.correct === 'true') {
+          btn.classList.add('correct');
+          resultEl.style.background = '#d4edda';
+          resultEl.style.color = '#155724';
+          if (quizId === 'quiz-5v') {
+            resultEl.textContent = '✅ 答對了！Veracity 指的是資料的真實性與可信度，是大數據 5V 之一。';
+          } else if (quizId === 'quiz-nn') {
+            resultEl.textContent = '✅ 答對了！CNN（卷積神經網路）擅長提取影像的空間特徵，最適合影像辨識。';
+          } else {
+            resultEl.textContent = '✅ 答對了！隨機森林是集成多棵決策樹的演算法，準確率比單一決策樹更高。';
+          }
+        } else {
+          btn.classList.add('wrong');
+          resultEl.style.background = '#f8d7da';
+          resultEl.style.color = '#721c24';
+          if (quizId === 'quiz-5v') {
+            resultEl.textContent = '❌ 答錯了！正確答案是 C. Veracity（數據真實性）。';
+          } else if (quizId === 'quiz-nn') {
+            resultEl.textContent = '❌ 答錯了！正確答案是 B. CNN（卷積神經網路）。';
+          } else {
+            resultEl.textContent = '❌ 答錯了！正確答案是 B。隨機森林由多棵決策樹組成，透過集成學習提升準確率。';
+          }
+        }
+      }
+    }
+
+    // ===== 任務 14：彩帶動畫 =====
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const COLORS = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#FF8E53'];
+      const particles = [];
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          w: 8 + Math.random() * 8,
+          h: 4 + Math.random() * 4,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          vx: (Math.random() - 0.5) * 2,
+          vy: 2 + Math.random() * 4,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.2,
+        });
+      }
+
+      const START = performance.now();
+      const DURATION = 3000;
+      let rafId;
+
+      function draw(now) {
+        const elapsed = now - START;
+        if (elapsed > DURATION) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          return;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(function(p) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.angle += p.spin;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        rafId = requestAnimationFrame(draw);
+      }
+      rafId = requestAnimationFrame(draw);
+    }
+
+    // ===== 鍵盤方向鍵支援 =====
+    document.addEventListener('keydown', function(e) {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+      if (e.key === 'ArrowRight') navigate('next');
+      if (e.key === 'ArrowLeft')  navigate('prev');
+    });
+
+    // ===== 觸控滑動手勢 =====
+    (function initTouch() {
+      const THRESHOLD = 50;
+      let touchStartX = 0;
+      document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      document.addEventListener('touchend', function(e) {
+        const delta = e.changedTouches[0].clientX - touchStartX;
+        if (delta < -THRESHOLD) navigate('next');
+        else if (delta > THRESHOLD) navigate('prev');
+      }, { passive: true });
+    })();
+
+    // ===== 初始化 =====
+    (function init() {
+      // 重新收集 slides（slides 已填入）
+      AppState.slides = Array.from(document.querySelectorAll('#slide-container .slide'));
+      AppState.totalSlides = AppState.slides.length;
+
+      // 確保第一個 slide 有 active class
+      AppState.slides.forEach(function(s, i) {
+        s.classList.toggle('active', i === 0);
+      });
+
+      // 重新開始按鈕
+      const btnRestart = document.getElementById('btn-restart');
+      if (btnRestart) {
+        btnRestart.addEventListener('click', function() {
+          if (AppState.isAnimating) return;
+          const oldIndex = AppState.currentIndex;
+          AppState.currentIndex = 0;
+          AppState.isAnimating = true;
+          applyTransition(AppState.slides[oldIndex] || null, AppState.slides[0] || null, 'prev');
+          updateNavBar();
+          updateProgressDots();
+          updateButtons();
+        });
+      }
+
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      if (btnPrev) btnPrev.addEventListener('click', function() { navigate('prev'); });
+      if (btnNext) btnNext.addEventListener('click', function() { navigate('next'); });
+
+      updateNavBar();
+      updateProgressDots();
+      updateButtons();
+
+      // 初始化互動元件
+      initExpandableCards();
+      initFlipCards();
+
+      // 修正損壞的 emoji（講義及補充教材 icon）
+      document.querySelectorAll('.resource-icon').forEach(function(el) {
+        if (!el.textContent.trim() || el.textContent.charCodeAt(0) === 65533) {
+          el.textContent = '📚';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
