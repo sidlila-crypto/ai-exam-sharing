@@ -49,7 +49,7 @@
       /* position:sticky 已提供定位上下文，子元素 absolute 相對於此 */
     }
     #nav-section-name {
-      font-size: var(--font-md); font-weight: 700; color: var(--color-coral);
+      font-size: var(--font-lg); font-weight: 700; color: var(--color-coral);
       position: absolute; left: 50%; transform: translateX(-50%);
       white-space: nowrap;
     }
@@ -254,7 +254,7 @@
       #page-controller button { min-height: 44px; min-width: 100px; font-size: var(--font-sm); }
       .step-header { min-height: 44px; }
       .resource-card { min-height: 44px; }
-      .flip-card { width: 140px; height: 90px; }
+      .flip-card { width: 160px; height: 90px; }
       .dot { width: 10px; height: 10px; }
       #page-controller { gap: var(--space-sm); padding: var(--space-sm) var(--space-md); }
       .info-grid { grid-template-columns: 1fr 1fr; }
@@ -421,7 +421,7 @@
               <span class="step-icon">🎬</span>
               <span class="step-title">看影片：透過簡短影片引導建立概念</span>
             </div>
-            <div class="step-body">憶筆 YouTube 的單元影片很好懂</div>
+            <div class="step-body">憶筆 YouTube 的"iPAS AI應用規劃師(初級)【 以「聆聽」來學習】"播放清單</div>
           </div>
           <div class="highlight-card" data-expanded="false">
             <div class="step-header">
@@ -596,7 +596,7 @@
         <p class="slide-subtitle">神經網路大匯集</p>
         <div style="display:flex;flex-direction:column;gap:var(--space-md);align-items:center;width:100%;">
           <!-- 上排：FNN、DNN -->
-          <div style="display:flex;gap:var(--space-md);justify-content:center;">
+          <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
             <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：FNN">
               <div class="flip-card-inner">
                 <div class="flip-card-front"><span class="term-en">FNN</span></div>
@@ -617,13 +617,13 @@
             </div>
           </div>
           <!-- 下排：CNN、RNN、LSTM -->
-          <div style="display:flex;gap:var(--space-md);justify-content:center;">
+          <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
             <div class="flip-card" role="button" tabindex="0" aria-label="翻牌：CNN">
               <div class="flip-card-inner">
                 <div class="flip-card-front"><span class="term-en">CNN</span></div>
                 <div class="flip-card-back">
                   <span class="term-zh">卷積神經網路</span>
-                  <span class="term-hint">"C" → Camera → 擅長處理影像</span>
+                  <span class="term-hint">"C" → Camera → 影像</span>
                 </div>
               </div>
             </div>
@@ -632,7 +632,7 @@
                 <div class="flip-card-front"><span class="term-en">RNN</span></div>
                 <div class="flip-card-back">
                   <span class="term-zh">遞迴神經網路</span>
-                  <span class="term-hint">"R" → Remember → 會處理影像還有記憶上下文能力</span>
+                  <span class="term-hint">"R" → Remember → 影像+記憶</span>
                 </div>
               </div>
             </div>
@@ -641,7 +641,7 @@
                 <div class="flip-card-front"><span class="term-en">LSTM</span></div>
                 <div class="flip-card-back">
                   <span class="term-zh">長短期記憶網路</span>
-                  <span class="term-hint">"L" → Long Remember → 上下文記憶更好</span>
+                  <span class="term-hint">"L" → Long  → 長記憶</span>
                 </div>
               </div>
             </div>
@@ -672,7 +672,7 @@
     <!-- s5-2：階層聯想法 -->
     <section class="slide" data-section="5" data-section-name="邪門歪道理解法" id="s5-2">
       <div class="slide-content">
-        <h2 class="slide-title">一座森林絕對比一棵樹厲害 🌳🌳🌳</h2>
+        <h2 class="slide-title">一座森林絕對比一棵樹厲害</h2>
         <div class="card" style="max-width:600px;">
           <h3 style="font-size:var(--font-md);font-weight:700;color:var(--color-coral);margin-bottom:var(--space-md);">機器學習演算法的進化</h3>
           <div class="chain">
